@@ -23,9 +23,12 @@
       <button class="btn btn-primary" (click)="onAdd(input.value)">Add Item!</button>
       <hr>
       <ul class="list-group">
+        <!-- Here we bind the trigger list1 with this element, no need to check a state property since we are using it to validate entering the DOM and deleting
+        so we use the void reserved word on the trigger's transitions definitions-->
         <li
           class="list-group-item"
           (click)="onDelete(item)"
+          [@list1]
           *ngFor="let item of list">
           {{ item }}
         </li>

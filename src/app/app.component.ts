@@ -54,6 +54,25 @@ import { transition } from '@angular/animations';
         })),
         animate(500)  // animate without style simply takes 500 ms to complete transition to final state
       ])
+    ]),
+    trigger('list1', [   // this is the defined trigger name that is bound to the template element
+      state('in', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      transition('void => *', [ // void is helpfull to identify when an elemtet didn't exist or goes away
+        style({ // initial state as soon as the element enters the DOM
+          opacity: 0,
+          transform: 'translateX(-100px)'
+        }),
+        animate(300)  // time to take to get to the final state
+      ]),
+      transition('* => void', [ // transition to define when an element is deleted
+        animate(300, style({  // during the animate we define a final state, in this case is just before it's removed from DOM
+          transform: 'translateX(100px)',
+          opacity: 0
+        })),
+      ])
     ])
   ]
 })
