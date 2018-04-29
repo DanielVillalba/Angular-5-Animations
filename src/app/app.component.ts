@@ -124,6 +124,14 @@ export class AppComponent {
   wildState = 'normal';
   list = ['Milk', 'Sugar', 'Bread'];
 
+  animationStarted(event) {
+    console.log(event);
+  }
+
+  animationEnded(event) {
+    console.log(event);
+  }
+
     onAnimate() {
       this.state === 'normal' ? this.state = 'highlighted' : this.state = 'normal';
       this.wildState === 'normal' ? this.wildState = 'highlighted' : this.wildState = 'normal';
