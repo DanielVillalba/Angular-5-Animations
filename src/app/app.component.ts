@@ -3,7 +3,8 @@ import {
   trigger,
   state,
   style,
-  animate
+  animate,
+  keyframes
 } from '@angular/animations';   // the animation classes needs to be imported from @angular/animations
 import { transition } from '@angular/animations';
 
@@ -69,6 +70,42 @@ import { transition } from '@angular/animations';
       ]),
       transition('* => void', [ // transition to define when an element is deleted
         animate(300, style({  // during the animate we define a final state, in this case is just before it's removed from DOM
+          transform: 'translateX(100px)',
+          opacity: 0
+        })),
+      ])
+    ]),
+    trigger('list2', [
+      state('in', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      transition('void => *', [
+        animate(1000, keyframes([ // here every style will take an equal part of the time to execute unless explicitelly define with offset
+          style({
+            transform: 'translateX(-100px)',
+            opacity: 0,
+            offset: 0 // initial style so is 0
+          }),
+          style({
+            transform: 'translateX(-50px)',
+            opacity: 0.5,
+            offset: 0.3 // at 0.3 of the time it should be in this state
+          }),
+          style({
+            transform: 'translateX(-20px)',
+            opacity: 1,
+            offset: 0.8 // // at 0.8 of the time it should be in this state
+          }),
+          style({
+            transform: 'translateX(0)',
+            opacity: 1,
+            offset: 1 // final state, so at 3 seconds should be in this state
+          })
+        ]))
+      ]),
+      transition('* => void', [
+        animate(300, style({
           transform: 'translateX(100px)',
           opacity: 0
         })),
