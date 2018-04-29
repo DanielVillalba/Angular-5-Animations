@@ -4,7 +4,8 @@ import {
   state,
   style,
   animate,
-  keyframes
+  keyframes,
+  group
 } from '@angular/animations';   // the animation classes needs to be imported from @angular/animations
 import { transition } from '@angular/animations';
 
@@ -105,10 +106,15 @@ import { transition } from '@angular/animations';
         ]))
       ]),
       transition('* => void', [
-        animate(300, style({
-          transform: 'translateX(100px)',
-          opacity: 0
-        })),
+        group([ // animations can be grouped to be executed at the same time or at least start at the same time
+          animate(300, style({
+            color: 'red'
+          })),
+          animate(800, style({
+            transform: 'translateX(100px)',
+            opacity: 0
+          }))
+        ])
       ])
     ])
   ]
